@@ -1,0 +1,51 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Directorios de construcción
+build/
+dist/
+out/
+
+# Directorios temporales
+.tmp/
+.temp/
+.cache/
+
+# Coverage para tests
+coverage/
+
+# Configuración de sistema operativo (macOS y Windows)
+.DS_Store
+Thumbs.db
+
+# Configuración de IDEs y editores
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos de configuración específicos de sistema operativo
+*.swp
+*.swo
+*.bak
+*.orig
+
+# Parcel-bundler cache (si se utiliza Parcel)
+.cache/
+
+# Archivos de configuración de servicio de nube (si los hay)
+.firebase/
+.netlify/
+
+# Directorios de producción para React
+build/
