@@ -66,7 +66,10 @@ UserController.registerUser = async (req, res) => {
             { expiresIn: 3600 },
             (err, token) => {
                 if (err) throw err;
-                res.json({ token });
+                res.status(201).json({
+                    message: 'Registro exitoso', // Mensaje de éxito
+                    token // Token JWT
+                });
             }
         );
     } catch (err) {
@@ -153,7 +156,11 @@ UserController.login = async (req, res) => {
         loginAttempt.blocked = false;
         await loginAttempt.save();
 
-        res.status(200).json({ token });
+          // Responder con un mensaje de éxito y el token
+          res.status(200).json({
+            message: 'Bienvenido, Inicio de sesión exitoso', // Mensaje de éxito
+            token // Token JWT
+        });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error Interno del Servidor.' });
