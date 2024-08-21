@@ -199,8 +199,17 @@ UserController.sendVerificationCode = async (req, res) => {
         const mailOptions = {
             from: process.env.EMAIL_USER,
             to: user.email,
-            subject: 'Código de verificación para restablecer tu contraseña',
-            text: `Tu código de verificación es ${verificationCode}`,
+            subject: 'Recuperación de contraseña - Codigo de Verificación',
+            html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
+          <h2 style="color: #333;">¡Hola!</h2>
+          <p style="color: #555;">Se ha solicitado una verificación para tu cuenta para poder restablecer tu cuenta.</p>
+          <p style="font-size: 20px; font-weight: bold; color: #333;">Código de Verificación:</p>
+          <p style="font-size: 24px; font-weight: bold; color: #007bff;">${verificationCode}</p>
+          <p style="color: #777;">Si no solicitaste este código, por favor ignora este correo.</p>
+          <p style="color: #999;">Gracias,<br>El equipo de tu aplicación</p>
+        </div>
+      `, // Contenido del correo en HTML
         };
 
         await transporter.sendMail(mailOptions);
