@@ -3,7 +3,7 @@ const middlewareController = {};
 const jwt = require ('jsonwebtoken');
 const User = require('../models/User.js');
 
-const JWT_SECRET = 'your_jwt_secret'; // Asegúrate de definir esto en un entorno seguro
+//const JWT_SECRET = 'your_jwt_secret'; // Asegúrate de definir esto en un entorno seguro
 
 middlewareController.authMiddleware = async (req, res, next) => {
     const authHeader = req.headers.authorization;
@@ -14,7 +14,7 @@ middlewareController.authMiddleware = async (req, res, next) => {
     const token = authHeader.split(' ')[1];
 
     try {
-        const decoded = jwt.verify(token, JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded.user.id);
 
         if (!user || user.verificationToken !== token) {

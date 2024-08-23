@@ -5,8 +5,8 @@ const contentController = require('../controllers/contentController');
 const testimonioController = require('../controllers/testimonialController');
 const portfolioController = require('../controllers/portafolioController');
 const authController = require('../controllers/authController');
-//const upload = require('../utils/s3');
 const middlewareController = require('../middleware/auth');
+const upload = require('../middleware/upload');
 
 router.get('/getAllUsers', authController.getAllUsers);
 router.post('/register', authController.registerUser);
@@ -24,13 +24,17 @@ router.get('/allContents', middlewareController.authMiddleware, contentControlle
 router.put('/updateContent/:id', middlewareController.authMiddleware, contentController.updateContent);
 router.delete('/deleteContent/:id', middlewareController.authMiddleware, contentController.deleteContent);
 
+router.get('/getAllTestimonial', testimonioController.getAllTestimonial);
 router.post('/createTestimonio', middlewareController.authMiddleware, testimonioController.createTestimonio);
 router.put('/updateTestimonio/:id', middlewareController.authMiddleware, testimonioController.updateTestimonio);
 router.delete('/deleteTestimonio/:id', middlewareController.authMiddleware, testimonioController.deleteTestimonio);
 
-// Subir imágenes a AWS S3
-//router.post('/upload', middlewareController, upload.array('images', 10), portfolioController.uploadImages);
-router.post('/createPortafolio', middlewareController.authMiddleware, portfolioController.createPortafolio);
-router.put('/updatePortafolio/:id', middlewareController.authMiddleware, portfolioController.updatePortafolio);
+// Ruta para actualizar un portafolio
+router.put('/updatePortafolios/:id', upload.single('file', 10),portfolioController.updatePortafolio);
+// Ruta para eliminar un portafolio
+router.delete('/deletePortfolios/:id', portfolioController.deletePortfolio);// Ruta para crear un nuevo portafolio
+router.post('/createPortfolio', upload.single('file'), middlewareController.authMiddleware, portfolioController.createPortafolio);
+// Ruta para obtener los portafolios del usuario
+router.get('/portfolios/user', middlewareController.authMiddleware, portfolioController.getUserPortfolios);
 
 module.exports = router;

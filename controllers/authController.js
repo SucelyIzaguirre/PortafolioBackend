@@ -146,7 +146,7 @@ UserController.login = async (req, res) => {
         };
         
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' });
-        
+        const name = user.name;
         user.verificationToken = token;
         await user.save();
         
@@ -159,7 +159,8 @@ UserController.login = async (req, res) => {
           // Responder con un mensaje de éxito y el token
           res.status(200).json({
             message: 'Bienvenido, Inicio de sesión exitoso', // Mensaje de éxito
-            token // Token JWT
+            token, // Token JWT
+            name
         });
     } catch (error) {
         console.error(error);
