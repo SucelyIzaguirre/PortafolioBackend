@@ -29,12 +29,13 @@ router.post('/createTestimonio', middlewareController.authMiddleware, testimonio
 router.put('/updateTestimonio/:id', middlewareController.authMiddleware, testimonioController.updateTestimonio);
 router.delete('/deleteTestimonio/:id', middlewareController.authMiddleware, testimonioController.deleteTestimonio);
 
-// Ruta para actualizar un portafolio
-router.put('/updatePortafolios/:id', upload.single('file', 10),portfolioController.updatePortafolio);
-// Ruta para eliminar un portafolio
-router.delete('/deletePortfolios/:id', portfolioController.deletePortfolio);// Ruta para crear un nuevo portafolio
-router.post('/createPortfolio', upload.single('file'), middlewareController.authMiddleware, portfolioController.createPortafolio);
 // Ruta para obtener los portafolios del usuario
 router.get('/portfolios/user', middlewareController.authMiddleware, portfolioController.getUserPortfolios);
+// Ruta para registrar un portafolio
+router.post('/createPortfolio', middlewareController.authMiddleware, upload.any(), portfolioController.createPortafolio);
+// Ruta para actualizar un portafolio
+router.put('/updatePortfolios/:id', upload.any(), portfolioController.updatePortafolio);
+// Ruta para eliminar un portafolio
+router.delete('/deletePortfolios/:id', middlewareController.authMiddleware, portfolioController.deletePortfolio);// Ruta para crear un nuevo portafolio
 
 module.exports = router;

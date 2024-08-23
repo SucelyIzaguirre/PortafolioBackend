@@ -3,8 +3,6 @@ const middlewareController = {};
 const jwt = require ('jsonwebtoken');
 const User = require('../models/User.js');
 
-//const JWT_SECRET = 'your_jwt_secret'; // Asegúrate de definir esto en un entorno seguro
-
 middlewareController.authMiddleware = async (req, res, next) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
@@ -27,7 +25,7 @@ middlewareController.authMiddleware = async (req, res, next) => {
         console.error(error);
         res.status(401).json({ message: 'Token inválido.' });
     }
-};
+  };
 
 module.exports = middlewareController;
 
